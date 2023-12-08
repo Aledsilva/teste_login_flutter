@@ -8,7 +8,7 @@ TextFormField sharedTextField(String text, IconData icon, bool isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
     cursorColor: Colors.black45,
-    style: TextStyle(color: Colors.white.withOpacity(0.9)),
+    style: TextStyle(color: Colors.black45.withOpacity(0.9)),
     decoration: InputDecoration(
       prefixIcon: Icon(
         icon,
@@ -16,8 +16,10 @@ TextFormField sharedTextField(String text, IconData icon, bool isPasswordType,
       ),
       labelText: text,
       floatingLabelBehavior: FloatingLabelBehavior.auto,
+      floatingLabelStyle: const TextStyle(
+          color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
       filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
+      fillColor: Colors.white.withOpacity(0.8),
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
           borderSide: const BorderSide(width: 0, style: BorderStyle.none)),

@@ -15,7 +15,20 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _login_password_controller =
       TextEditingController();
 
-  handleSubmit() async {}
+  signIn() {
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+            email: _login_email_controller.text,
+            password: _login_password_controller.text)
+        .then((value) {
+      print("O OUSADO LOGOU");
+      Navigator.pushReplacementNamed(context, '/home-page');
+    }).onError((error, stackTrace) {
+      const text = 'Preencha os campos corretamente';
+      final snackBar = const SnackBar(content: Text(text));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,30 +53,29 @@ class _LoginPageState extends State<LoginPage> {
                   height: 30,
                 ),
                 sharedButton(context, "ENTRAR", () {
-                  FirebaseAuth.instance
-                      .signInWithEmailAndPassword(
-                          email: _login_email_controller.text,
-                          password: _login_password_controller.text)
-                      .then((value) {
-                    print("O OUSADO LOGOU");
-                    Navigator.pushReplacementNamed(context, '/home-page');
-                  }).onError((error, stackTrace) {
-                    print("DEU RUIM: ${error.toString()}");
-                  });
-
-                  print("TESTANDO");
+                  signIn();
                 }),
                 const SizedBox(
                   height: 30,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/register-page');
-                  },
-                  child: const Text(
-                    'Cadastre-se',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Ainda não tem uma conta?",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/register-page');
+                      },
+                      child: const Text(
+                        ' Cadastre-se',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
                 )
               ],
             ),

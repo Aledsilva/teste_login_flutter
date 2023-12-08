@@ -55,7 +55,9 @@ class _RegisterPageState extends State<RegisterPage> {
         _confirmPasswordController.text.trim()) {
       return true;
     } else {
-      print("Senhas diferentes");
+      final text = 'As senhas precisam ser iguais';
+      final snackBar = SnackBar(content: Text(text));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
       return false;
     }
   }
@@ -90,13 +92,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 sharedTextField("Confirme a senha", Icons.lock_outline, true,
                     _confirmPasswordController),
-                InkWell(
-                  child: const Icon(
-                    Icons.photo_camera,
-                    size: 80,
-                  ),
-                  onTap: () {},
-                ),
+                // InkWell(
+                //   child: const Icon(
+                //     Icons.photo_camera,
+                //     size: 80,
+                //   ),
+                //   onTap: () {},
+                // ),
                 const SizedBox(
                   height: 20,
                 ),
